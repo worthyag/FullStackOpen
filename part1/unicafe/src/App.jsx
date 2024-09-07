@@ -1,33 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+const Button = ({ handleState, label, id }) => {
+  return (
+    <button id={id} onClick={handleState}>{label}</button>
+  );
+};
+
+const GiveFeedback = (props) => {
+  const {setGood, setNeutral, setBad} = props;
+  const {good, neutral, bad} = props;
+  return (
+    <section id="feedback-section">
+      <h2>Give Feedback</h2>
+      <div className="feedback">
+        <Button id={"goodBtn"} handleState={() => setGood(good + 1)} label={"Good"} />
+        <Button id={"neutralBtn"} handleState={() => setNeutral(neutral + 1)} label={"Neutral"} />
+        <Button id={"badBtn"} handleState={() => setBad(bad + 1)} label={"Bad"} />
+      </div>
+    </section>
+  );
+};
+
+const Statistics = ({ good, neutral, bad }) => {
+  return (
+    <section id="statistics-section">
+    <h2>Statistics</h2>
+    <div className="statistics">
+      <p className="good"><span>Good:</span> {good}</p>
+      <p className="neutral"><span>Neutral:</span> {neutral}</p>
+      <p className="bad"><span>Bad:</span> {bad}</p>
+    </div>
+    </section>
+  );
+};
+
+const App = () => {
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>UniCafe</h1>
+      <GiveFeedback
+       good={good} setGood={setGood}
+       neutral={neutral} setNeutral={setNeutral}
+       bad={bad} setBad={setBad}
+      />
+      <Statistics 
+        good={good} 
+        neutral={neutral} 
+        bad={bad}
+      />
     </>
   )
 }

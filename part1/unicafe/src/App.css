@@ -1,3 +1,8 @@
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,38 +10,83 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  font-size: 2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2 {
+  font-size: 1.4rem;
+  color: #545dd9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+button  {
+  padding: 8px 16px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+
+  font-size: 1.5rem;
 }
 
-.card {
-  padding: 2em;
+button:hover {
+  cursor: pointer;
+  background-color: #282727;
 }
 
-.read-the-docs {
-  color: #888;
+#feedback-section {
+  margin: 48px 0px;
+}
+
+.feedback {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin: 64px 0 100px 0;
+}
+
+#goodBtn {
+  background-color: #47b247;
+}
+
+#goodBtn:hover {
+  background-color: #3f8d3f;
+}
+
+#neutralBtn {
+  background-color: #c67723;
+}
+
+#neutralBtn:hover {
+  background-color: #b26e26;
+}
+
+#badBtn {
+  background-color: #bd2424;
+}
+
+#badBtn:hover {
+  background-color: #a82626;
+}
+
+#statistics-section {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.statistics {
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+
+  /* Background */
+  background-color: #545dd9;
+  color: #ffffff;
+  padding: 8px 96px;
+  border-radius: 8px;
+}
+
+.statistics  span {
+  font-weight: bold;
 }
