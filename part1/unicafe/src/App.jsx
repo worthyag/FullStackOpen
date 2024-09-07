@@ -6,6 +6,16 @@ const Button = ({ handleState, label, id }) => {
   );
 };
 
+const StatisticLine = ({ stat, statLabel }) => {
+  return (
+    <p className={statLabel}>
+      <span>
+        {statLabel[0].toUpperCase() + statLabel.slice(1)}:
+      </span> {stat}
+    </p>
+  );
+};
+
 const GiveFeedback = (props) => {
   const {setGood, setNeutral, setBad} = props;
   const {good, neutral, bad} = props;
@@ -27,10 +37,6 @@ const Statistics = ({ good, neutral, bad }) => {
       <section id="statistics-section">
       <h2>Statistics</h2>
       <div className="statistics">
-        <p className="good"><span>Good:</span> {good}</p>
-        <p className="neutral"><span>Neutral:</span> {neutral}</p>
-        <p className="bad"><span>Bad:</span> {bad}</p>
-        <p className="all"><span>All:</span> {good + neutral + bad}</p>
         <p>Click the buttons to give feedback!</p>
       </div>
       </section>
@@ -41,12 +47,18 @@ const Statistics = ({ good, neutral, bad }) => {
     <section id="statistics-section">
     <h2>Statistics</h2>
     <div className="statistics">
-      <p className="good"><span>Good:</span> {good}</p>
-      <p className="neutral"><span>Neutral:</span> {neutral}</p>
-      <p className="bad"><span>Bad:</span> {bad}</p>
-      <p className="all"><span>All:</span> {good + neutral + bad}</p>
-      <p className="avg"><span>Avg:</span> {(good + (bad * -1))/(good + neutral + bad)}</p>
-      <p className="pos"><span>Positive:</span> {Math.round(((good/(good + neutral + bad)) * 100) * 100) / 100}%</p>
+      <StatisticLine stat={good} statLabel={"good"} />
+      <StatisticLine stat={neutral} statLabel={"neutral"} />
+      <StatisticLine stat={bad} statLabel={"bad"} />
+      <StatisticLine stat={good + neutral + bad} statLabel={"all"} />
+      <StatisticLine 
+        stat={(good + (bad * -1))/(good + neutral + bad)} 
+        statLabel={"avg"} 
+      />
+      <StatisticLine 
+        stat={(Math.round(((good/(good + neutral + bad)) * 100) * 100) / 100) + '%'} 
+        statLabel={"positive"} 
+      />
     </div>
     </section>
   );
