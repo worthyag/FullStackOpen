@@ -76,20 +76,36 @@ button:hover {
 }
 
 .statistics {
-  display: flex;
-  flex-direction: row;
-  gap: 36px;
+  text-align: right;
 
   /* Background */
   background-color: #545dd9;
   color: #ffffff;
-  padding: 8px 96px;
+  padding: 8px;
   border-radius: 8px;
 
   /* Center horizontally */
   margin: 32px auto 0 auto;
 }
 
-.statistics  span {
+.statistics table {
+  width: 100%;
+  /* so the borders and padding don't interfere with the row's background */
+  border-collapse: collapse; 
+}
+
+.statistics td {
+  width: 100%;
+  padding: 8px 96px;
+}
+
+.statistics td:first-child {
   font-weight: bold;
+  text-align: left;
+  width: 200px;
+}
+
+.statistics tr:nth-child(odd) {
+  background-color: #ffffff;
+  color: #000000;
 }

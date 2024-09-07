@@ -8,11 +8,10 @@ const Button = ({ handleState, label, id }) => {
 
 const StatisticLine = ({ stat, statLabel }) => {
   return (
-    <p className={statLabel}>
-      <span>
-        {statLabel[0].toUpperCase() + statLabel.slice(1)}:
-      </span> {stat}
-    </p>
+    <tr className={statLabel}>
+      <td>{statLabel[0].toUpperCase() + statLabel.slice(1)}</td>
+      <td>{stat}</td>
+    </tr>
   );
 };
 
@@ -47,18 +46,22 @@ const Statistics = ({ good, neutral, bad }) => {
     <section id="statistics-section">
     <h2>Statistics</h2>
     <div className="statistics">
-      <StatisticLine stat={good} statLabel={"good"} />
-      <StatisticLine stat={neutral} statLabel={"neutral"} />
-      <StatisticLine stat={bad} statLabel={"bad"} />
-      <StatisticLine stat={good + neutral + bad} statLabel={"all"} />
-      <StatisticLine 
-        stat={(good + (bad * -1))/(good + neutral + bad)} 
-        statLabel={"avg"} 
-      />
-      <StatisticLine 
-        stat={(Math.round(((good/(good + neutral + bad)) * 100) * 100) / 100) + '%'} 
-        statLabel={"positive"} 
-      />
+      <table>
+        <tbody>
+          <StatisticLine stat={good} statLabel={"good"} />
+          <StatisticLine stat={neutral} statLabel={"neutral"} />
+          <StatisticLine stat={bad} statLabel={"bad"} />
+          <StatisticLine stat={good + neutral + bad} statLabel={"all"} />
+          <StatisticLine 
+            stat={(good + (bad * -1))/(good + neutral + bad)} 
+            statLabel={"avg"} 
+          />
+          <StatisticLine 
+            stat={(Math.round(((good/(good + neutral + bad)) * 100) * 100) / 100) + '%'} 
+            statLabel={"positive"} 
+          />
+        </tbody>
+      </table>
     </div>
     </section>
   );
