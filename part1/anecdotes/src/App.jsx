@@ -14,17 +14,44 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ];
 
+  const votesObj = {};
+  for (const anecdote of anecdotes) {
+    votesObj[anecdote] = 0;
+  };
+
+
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState({...votesObj});
+
+  const nextAnecdote = () => {
+    if (selected < (anecdotes.length - 1)) setSelected(selected + 1);
+    else setSelected(0);
+  };
+
+  const addVote = () => {
+    setVotes({
+      ...votes, 
+      [anecdotes[selected]]: votes[anecdotes[selected]] + 1
+    });
+  }
 
   return (
     <>
       <h1>Anecdotes</h1>
-      <div>
+      <section>
         <p>{anecdotes[selected]}</p>
-        <Button handleEvent={() => setSelected(Math.floor(Math.random() * 8))} label={"New Anecdote"} />
-      </div>
+        <span>has {votes[anecdotes[selected]]} vote(s)</span>
+        <div className="btns">
+          <Button handleEvent={addVote} label={"Vote"} />
+          <Button handleEvent={nextAnecdote} label={"Next Anecdote"} />
+        </div>
+        {console.log(votes)}
+      </section>
     </>
   );
 };
 
 export default App;
+
+
+{/* <Button handleEvent={() => setSelected(Math.floor(Math.random() * 8))} label={"New Anecdote"} /> */}
