@@ -4,7 +4,7 @@
 }
 
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -72,7 +72,7 @@ button:hover {
 #statistics-section {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  justify-content: center;
 }
 
 .statistics {
@@ -85,6 +85,9 @@ button:hover {
   color: #ffffff;
   padding: 8px 96px;
   border-radius: 8px;
+
+  /* Center horizontally */
+  margin: 32px auto 0 auto;
 }
 
 .statistics  span {

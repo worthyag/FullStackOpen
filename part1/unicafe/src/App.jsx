@@ -22,6 +22,21 @@ const GiveFeedback = (props) => {
 };
 
 const Statistics = ({ good, neutral, bad }) => {
+  if (good === 0 && neutral === 0 && bad === 0) {
+    return (
+      <section id="statistics-section">
+      <h2>Statistics</h2>
+      <div className="statistics">
+        <p className="good"><span>Good:</span> {good}</p>
+        <p className="neutral"><span>Neutral:</span> {neutral}</p>
+        <p className="bad"><span>Bad:</span> {bad}</p>
+        <p className="all"><span>All:</span> {good + neutral + bad}</p>
+        <p>Click the buttons to give feedback!</p>
+      </div>
+      </section>
+    );
+  }
+
   return (
     <section id="statistics-section">
     <h2>Statistics</h2>
@@ -29,6 +44,9 @@ const Statistics = ({ good, neutral, bad }) => {
       <p className="good"><span>Good:</span> {good}</p>
       <p className="neutral"><span>Neutral:</span> {neutral}</p>
       <p className="bad"><span>Bad:</span> {bad}</p>
+      <p className="all"><span>All:</span> {good + neutral + bad}</p>
+      <p className="avg"><span>Avg:</span> {(good + (bad * -1))/(good + neutral + bad)}</p>
+      <p className="pos"><span>Positive:</span> {Math.round(((good/(good + neutral + bad)) * 100) * 100) / 100}%</p>
     </div>
     </section>
   );
