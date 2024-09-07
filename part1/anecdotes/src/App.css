@@ -27,11 +27,11 @@ section {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 72px;
 }
 
 p {
   font-size: 1.1rem;
-  height: 200px;
   margin: 0 auto;
   width: 75%;
 }

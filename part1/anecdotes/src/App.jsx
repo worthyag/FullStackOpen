@@ -35,9 +35,15 @@ const App = () => {
     });
   }
 
+  const findAnecdotesWithMostVotes = () => {
+    return Object.keys(votes).reduce((highest, anecdote) =>
+      (votes[anecdote] > votes[highest]) ? anecdote : highest
+    , anecdotes[0]);
+  };
+
   return (
     <>
-      <h1>Anecdotes</h1>
+      <h2>Anecdote of the day</h2>
       <section>
         <p>{anecdotes[selected]}</p>
         <span>has {votes[anecdotes[selected]]} vote(s)</span>
@@ -45,7 +51,11 @@ const App = () => {
           <Button handleEvent={addVote} label={"Vote"} />
           <Button handleEvent={nextAnecdote} label={"Next Anecdote"} />
         </div>
-        {console.log(votes)}
+      </section>
+      <h2>Anecdote with the most votes</h2>
+      <section>
+        <p>{findAnecdotesWithMostVotes()}</p>
+        <span>has {votes[findAnecdotesWithMostVotes()]} vote(s)</span>
       </section>
     </>
   );
