@@ -21,3 +21,26 @@ ul {
 li {
   list-style: none;
 }
+
+form {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+button {
+  background-color: #2c8dbe;
+  color: #ffffff;
+  border: 2px solid #2c8dbe;
+  border-radius: 8px;
+}
+
+input, button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 2px solid #2c8dbe;
+}
+
+.debug {
+  margin-top: 24px;
+}
