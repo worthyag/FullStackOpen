@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+import Header from "./components/Header";
+import Filter from "./components/Filter";
+import AddContacts from "./components/AddContacts";
+import Numbers from "./components/Numbers";
+
 const App = () => {
   const [persons, setPersons] = useState([
     { 
@@ -27,13 +32,9 @@ const App = () => {
     }
   };
 
-  const handleAddName = (event) => {
-    setNewName(event.target.value);
-  };
+  const handleAddName = (event) => setNewName(event.target.value);
 
-  const handleAddNumber = (event) => {
-    setNewNumber(event.target.value);
-  };
+  const handleAddNumber = (event) => setNewNumber(event.target.value);
 
   const filterContacts = (event) => {
     if (event.target.value === "") {
@@ -51,53 +52,15 @@ const App = () => {
 
   return (
     <div>
-      <h1>Phonebook</h1>
-      <section className="filter-contacts">
-        <p>Filter shown with <input onChange={filterContacts} /></p>
-      </section>
-      <section className="add-contacts">
-        <h2>Add a new contact</h2>
-        <form onSubmit={addPerson}>
-          {/* Adding name. */}
-          <div>
-            <label htmlFor="name">name: </label>
-            <input
-              id="name"
-              value={newName}
-              onChange={handleAddName}
-            />
-          </div>
-          {/* Adding number. */}
-          <div>
-            <label htmlFor="number">number: </label>
-            <input
-              id="number"
-              value={newNumber}
-              onChange={handleAddNumber}
-            />
-          </div>
-          {/* Submitting form. */}
-          <div>
-            <button type="submit">add</button>
-          </div>
-        </form>
-        <div className="debug">debug: {newName} {newNumber}</div>
-      </section>
-      <section className="numbers">
-        <h2>Numbers</h2>
-        {contactsToShow.map(person => {
-          return (
-            <p key={person.name}>
-              <span>{person.name} </span>
-              <span>{person.number}</span>
-            </p>
-          )
-        })}
-      </section>
+      <Header title="Phonebook" />
+      <Filter filterContacts={filterContacts} />
+      <AddContacts 
+        addPerson={addPerson} newName={newName} handleAddName={handleAddName}
+        newNumber={newNumber} handleAddNumber={handleAddNumber}
+      />
+      <Numbers contactsToShow={contactsToShow} />
     </div>
   );
-
-
 };
 
 export default App;
