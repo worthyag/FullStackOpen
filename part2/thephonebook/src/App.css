@@ -9,3 +9,15 @@
 html {
   scroll-behavior: smooth;
 }
+
+#root {
+  text-align: center;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
