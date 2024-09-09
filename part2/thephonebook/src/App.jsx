@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import Header from "./components/Header";
 import Filter from "./components/Filter";
@@ -6,16 +7,19 @@ import AddContacts from "./components/AddContacts";
 import Numbers from "./components/Numbers";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { 
-      name: "Angel Love",
-      number: "555-357-2556"
-    }
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/persons")
+      .then(response => {
+        setPersons(response.data);
+      })
+  });
 
   const addPerson = (event) => {
     event.preventDefault();
