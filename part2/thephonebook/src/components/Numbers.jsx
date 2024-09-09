@@ -1,4 +1,4 @@
-const Numbers = ({ contactsToShow }) =>{
+const Numbers = ({ contactsToShow, deleteSelected }) =>{
   return (
     <section className="numbers">
       <h2>Numbers</h2>
@@ -7,6 +7,7 @@ const Numbers = ({ contactsToShow }) =>{
           <p key={person.name}>
             <span>{person.name} </span>
             <span>{person.number}</span>
+            <button id={person.id} onClick={deleteSelected} className="del-btn">delete</button>
           </p>
         )
       })}

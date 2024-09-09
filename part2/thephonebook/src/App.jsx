@@ -65,6 +65,26 @@ const App = () => {
     return lowerCased.includes(filter.toLowerCase());
   });
 
+  const deleteSelected = (event) => {
+    const id = event.target.id;
+    const selectedPerson = persons.find(person => person.id === id) || {name: "unknown"};
+
+    if (window.confirm(`Delete ${selectedPerson.name}?`)) {
+      personService
+        .deletePerson(id)
+        .then(deletedPerson => {
+          setPersons(persons.filter(person => person.id != deletedPerson.id));
+          alert(`${deletedPerson.name} successfully deleted!`);
+        })
+        .catch(error => {
+          alert("Person doesn't exist or already deleted from server.");
+          console.log(error);
+        });
+    } else {
+      console.log("Operation cancelled!");
+    }
+  };
+
   return (
     <div>
       <Header title="Phonebook" />
@@ -73,7 +93,7 @@ const App = () => {
         addPerson={addPerson} newName={newName} handleAddName={handleAddName}
         newNumber={newNumber} handleAddNumber={handleAddNumber}
       />
-      <Numbers contactsToShow={contactsToShow} />
+      <Numbers deleteSelected={deleteSelected} contactsToShow={contactsToShow} />
     </div>
   );
 };

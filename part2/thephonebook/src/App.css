@@ -45,3 +45,16 @@ input, button {
 .debug {
   margin-top: 24px;
 }
+
+.del-btn {
+  padding: 4px 8px;
+  margin-left: 12px;
+  background-color: #c03939;
+  border: 2px solid #c03939;
+}
+
+.del-btn:hover {
+  cursor: pointer;
+  background-color: #df3333;
+  border-color: #df3333;
+}
