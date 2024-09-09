@@ -81,7 +81,7 @@ const App = () => {
       personService
         .deletePerson(id)
         .then(deletedPerson => {
-          setPersons(persons.filter(person => person.id != deletedPerson.id));
+          setPersons(persons.filter(person => person.id !== deletedPerson.id));
           alert(`${deletedPerson.name} successfully deleted!`);
         })
         .catch(error => {
