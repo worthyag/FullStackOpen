@@ -20,7 +20,7 @@ const App = () => {
       .then(initialPeople => {
         setPersons(initialPeople);
       })
-  });
+  }, []);
 
   const addPerson = (event) => {
     event.preventDefault();
@@ -32,7 +32,7 @@ const App = () => {
         personService
           .updateNumber(toUpdate.id, {...toUpdate, number: newNumber})
           .then(updatedPerson => {
-            setPersons(persons.map(person => (toUpdate.id !== person.id) ? person : updatedPerson));
+            setPersons(persons.map(person => (toUpdate.id !== person.id) ? person : updatedPerson));            
           });
       }
       setNewName("");
