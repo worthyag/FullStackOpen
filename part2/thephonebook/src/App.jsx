@@ -14,7 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
-  const [successMsg, setSuccessMsg] = useState("Arto added successfully");
+  const [successMsg, setSuccessMsg] = useState(null);
 
   useEffect(() => {
     personService
