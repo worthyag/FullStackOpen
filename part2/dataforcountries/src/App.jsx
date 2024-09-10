@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import FindCountry from "./components/FindCountry";
+import DisplayCountryInfo from "./components/DisplayCountryInfo";
 
 const App = () => {
   const [country, setCountry] = useState("");
@@ -19,10 +20,13 @@ const App = () => {
   }
 
   return (
-    <FindCountry 
-      country={country} 
-      handleChange={handleChange}
-    />
+    <div>
+      <FindCountry
+        country={country}
+        handleChange={handleChange}
+      />
+      <DisplayCountryInfo />
+    </div>
   );
 };
 
