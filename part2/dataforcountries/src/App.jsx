@@ -5,8 +5,9 @@ import FindCountry from "./components/FindCountry";
 import DisplayCountryInfo from "./components/DisplayCountryInfo";
 
 const App = () => {
-  const [country, setCountry] = useState("France");
+  const [country, setCountry] = useState(null);
   const [displayedCountry, setDisplayedCountry] = useState({});
+  const [isCountry, setIsCountry] = useState(null)
 
   useEffect(() => {
     axios
@@ -24,11 +25,17 @@ const App = () => {
         };
 
         setDisplayedCountry(countryObj);
+        setIsCountry(true);
       })
+      .catch((error) => {
+        console.log(error);
+        setIsCountry(false);
+      });
   }, [country]);
 
   const handleChange = (event) =>{
     setDisplayedCountry({})
+    setIsCountry(null);
     setCountry(event.target.value);
   }
 
@@ -37,6 +44,7 @@ const App = () => {
       <FindCountry
         country={country}
         handleChange={handleChange}
+        isCountry={isCountry}
       />
       <DisplayCountryInfo
         name={displayedCountry.name}
