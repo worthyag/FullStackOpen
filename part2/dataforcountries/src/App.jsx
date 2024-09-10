@@ -1,6 +1,8 @@
+import FindCountry from "./components/FindCountry";
+
 const App = () => {
   return (
-    <div>Hello, World!</div>
+    <FindCountry />
   );
 };
 
