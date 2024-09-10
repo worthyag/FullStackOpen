@@ -15,6 +15,7 @@ const App = () => {
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
   const [successMsg, setSuccessMsg] = useState(null);
+  const [isSuccessful, setIsSuccessful] = useState(null);
 
   useEffect(() => {
     personService
@@ -35,8 +36,14 @@ const App = () => {
           .updateNumber(toUpdate.id, {...toUpdate, number: newNumber})
           .then(updatedPerson => {
             setPersons(persons.map(person => (toUpdate.id !== person.id) ? person : updatedPerson));    
-            displaySuccessMsg(`${newName} successfully updated!`);
-            setTimeout(() => displaySuccessMsg(null), 3000);      
+            displaySuccessMsg(`${newName} successfully updated!`, true);
+            setTimeout(() => displaySuccessMsg(null, null), 3000);      
+          })
+          .catch(error => {
+            console.log(error);
+            displaySuccessMsg(`${newName} has already been removed from server.`, false);
+            setTimeout(() => displaySuccessMsg(null, null), 3000);
+            setPersons(persons.filter(person => newName !== person.name));   
           });
       }
       setNewName("");
@@ -54,8 +61,8 @@ const App = () => {
           setPersons(persons.concat(returnedPerson));
           setNewName("");
           setNewNumber("");
-          displaySuccessMsg(`${returnedPerson.name} successfully added!`);
-          setTimeout(() => displaySuccessMsg(null), 3000);   
+          displaySuccessMsg(`${returnedPerson.name} successfully added!`, true);
+          setTimeout(() => displaySuccessMsg(null, null), 3000);   
         });    
     }
   };
@@ -88,8 +95,8 @@ const App = () => {
         .deletePerson(id)
         .then(deletedPerson => {
           setPersons(persons.filter(person => person.id !== deletedPerson.id));
-          displaySuccessMsg(`${deletedPerson.name} successfully deleted!`);
-          setTimeout(() => displaySuccessMsg(null), 3000);   
+          displaySuccessMsg(`${deletedPerson.name} successfully deleted!`, true);
+          setTimeout(() => displaySuccessMsg(null, null), 3000);   
         })
         .catch(error => {
           alert("Person doesn't exist or already deleted from server.");
@@ -100,12 +107,15 @@ const App = () => {
     }
   };
 
-  const displaySuccessMsg = msg => setSuccessMsg(msg);
+  const displaySuccessMsg = (msg, isSuccess) => {
+    setSuccessMsg(msg);
+    setIsSuccessful(isSuccess);
+  }
 
   return (
     <div>
       <Header title="Phonebook" />
-      <Success msg={successMsg} />
+      <Success msg={successMsg} isSuccess={isSuccessful} />
       <Filter filterContacts={filterContacts} />
       <AddContacts 
         addPerson={addPerson} newName={newName} handleAddName={handleAddName}
