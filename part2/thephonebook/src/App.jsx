@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Filter from "./components/Filter";
 import AddContacts from "./components/AddContacts";
 import Numbers from "./components/Numbers";
+import Success from "./components/Success";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -13,6 +14,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
+  const [successMsg, setSuccessMsg] = useState("Arto added successfully");
 
   useEffect(() => {
     personService
@@ -32,7 +34,9 @@ const App = () => {
         personService
           .updateNumber(toUpdate.id, {...toUpdate, number: newNumber})
           .then(updatedPerson => {
-            setPersons(persons.map(person => (toUpdate.id !== person.id) ? person : updatedPerson));            
+            setPersons(persons.map(person => (toUpdate.id !== person.id) ? person : updatedPerson));    
+            displaySuccessMsg(`${newName} successfully updated!`);
+            setTimeout(() => displaySuccessMsg(null), 3000);      
           });
       }
       setNewName("");
@@ -50,6 +54,8 @@ const App = () => {
           setPersons(persons.concat(returnedPerson));
           setNewName("");
           setNewNumber("");
+          displaySuccessMsg(`${returnedPerson.name} successfully added!`);
+          setTimeout(() => displaySuccessMsg(null), 3000);   
         });    
     }
   };
@@ -82,7 +88,8 @@ const App = () => {
         .deletePerson(id)
         .then(deletedPerson => {
           setPersons(persons.filter(person => person.id !== deletedPerson.id));
-          alert(`${deletedPerson.name} successfully deleted!`);
+          displaySuccessMsg(`${deletedPerson.name} successfully deleted!`);
+          setTimeout(() => displaySuccessMsg(null), 3000);   
         })
         .catch(error => {
           alert("Person doesn't exist or already deleted from server.");
@@ -93,9 +100,12 @@ const App = () => {
     }
   };
 
+  const displaySuccessMsg = msg => setSuccessMsg(msg);
+
   return (
     <div>
       <Header title="Phonebook" />
+      <Success msg={successMsg} />
       <Filter filterContacts={filterContacts} />
       <AddContacts 
         addPerson={addPerson} newName={newName} handleAddName={handleAddName}

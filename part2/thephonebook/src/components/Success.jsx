@@ -1,7 +1,10 @@
-const Success = () =>{
+const Success = ({ msg }) => {
+  if (msg === null)
+    return null;
+
   return (
-    <div>
-      Success
+    <div className="success-msg">
+      <p>{msg}</p>
     </div>
   );
 };
