@@ -6,6 +6,32 @@ const Button = ({ onClick, label }) => {
   );
 };
 
+const AnecdoteOfTheDay = ({ info }) => {
+  const [anecdotes, points, selected, handleSelected, handleVote] = info; 
+  return (
+    <div>
+      <h2>Anecdote of The Day</h2>
+      <p>{anecdotes[selected]}</p>
+      <p>has {points[selected]} votes</p>
+      <Button onClick={handleSelected} label="Generate" />
+      <Button onClick={handleVote} label="Vote" />
+    </div>
+  );
+};
+
+const MostVotedAnecdote = ({ anecdotes, points }) => {
+  const maxVal = Math.max(...points);
+  const mostVoted = points.indexOf(maxVal);
+
+  return (
+    <div>
+      <h2>Anecdote with Most Votes</h2>
+      <p>{anecdotes[mostVoted]}</p>
+      <p>has {points[mostVoted]} votes</p>
+    </div>
+  );
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -34,10 +60,10 @@ const App = () => {
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {points[selected]} votes</p>
-      <Button onClick={handleSelected} label="Generate" />
-      <Button onClick={handleVote} label="Vote" />
+      <AnecdoteOfTheDay 
+        info={[anecdotes, points, selected, handleSelected, handleVote]}
+      />
+      <MostVotedAnecdote anecdotes={anecdotes} points={points} />
     </div>
   );
 };
