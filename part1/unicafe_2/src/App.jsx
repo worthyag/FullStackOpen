@@ -19,25 +19,29 @@ const Feedback = ({onGood, onNeutral, onBad}) => {
 
 const Stat = ({ label, stat }) => {
   return (
-    <p>{label} {stat}</p>
+    <tr><td>{label}</td><td>{stat}</td></tr>
   )
 };
 
 const Statistics = ({ good, neutral, bad }) => {
   const all = good + neutral + bad;
   const avg = (good + (bad * -1)) / all;
-  const pos = good / all;
+  const pos = (good / all) * 100;
 
   if (all > 0) {
     return (
       <div>
         <h1>Statistics</h1>
-        <Stat label="good" stat={good} />
-        <Stat label="neutral" stat={neutral} />
-        <Stat label="bad" stat={bad} />
-        <Stat label="all" stat={all} />
-        <Stat label="average" stat={avg} />
-        <Stat label="positive" stat={pos} />
+        <table>
+          <tbody>
+            <Stat label="good" stat={good} />
+            <Stat label="neutral" stat={neutral} />
+            <Stat label="bad" stat={bad} />
+            <Stat label="all" stat={all} />
+            <Stat label="average" stat={avg} />
+            <Stat label="positive" stat={`${pos}%`} />
+          </tbody>
+        </table>
       </div>
     );
   }
