@@ -6,13 +6,13 @@ const Button = ({ onClick, label }) => {
   );
 };
 
-const Feedback = ({good, neutral, bad}) => {
+const Feedback = ({onGood, onNeutral, onBad}) => {
   return (
     <div>
       <h1>Give Feedback</h1>
-      <Button label="good" onClick={good} />
-      <Button label="neutral" onClick={neutral} />
-      <Button label="bad" onClick={bad} />
+      <Button label="good" onClick={onGood} />
+      <Button label="neutral" onClick={onNeutral} />
+      <Button label="bad" onClick={onBad} />
     </div>
   );
 };
@@ -24,12 +24,19 @@ const Stat = ({ label, stat }) => {
 };
 
 const Statistics = ({ good, neutral, bad }) => {
+  const all = good + neutral + bad;
+  const avg = (good + (bad * -1)) / all;
+  const pos = good / all;
+
   return (
     <div>
       <h1>Statistics</h1>
       <Stat label="good" stat={good} />
       <Stat label="neutral" stat={neutral} />
       <Stat label="bad" stat={bad} />
+      <Stat label="all" stat={all} />
+      <Stat label="average" stat={avg} />
+      <Stat label="positive" stat={pos} />
     </div>
   );
 };
@@ -55,9 +62,9 @@ const App = () => {
   return (
     <div>
       <Feedback
-        good={handleGood}
-        neutral={handleNeutral}
-        bad={handleBad}
+        onGood={handleGood}
+        onNeutral={handleNeutral}
+        onBad={handleBad}
       />
       <Statistics 
         good={good}
