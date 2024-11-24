@@ -28,15 +28,23 @@ const Statistics = ({ good, neutral, bad }) => {
   const avg = (good + (bad * -1)) / all;
   const pos = good / all;
 
+  if (all > 0) {
+    return (
+      <div>
+        <h1>Statistics</h1>
+        <Stat label="good" stat={good} />
+        <Stat label="neutral" stat={neutral} />
+        <Stat label="bad" stat={bad} />
+        <Stat label="all" stat={all} />
+        <Stat label="average" stat={avg} />
+        <Stat label="positive" stat={pos} />
+      </div>
+    );
+  }
   return (
     <div>
       <h1>Statistics</h1>
-      <Stat label="good" stat={good} />
-      <Stat label="neutral" stat={neutral} />
-      <Stat label="bad" stat={bad} />
-      <Stat label="all" stat={all} />
-      <Stat label="average" stat={avg} />
-      <Stat label="positive" stat={pos} />
+      <p>No feedback given.</p>
     </div>
   );
 };
