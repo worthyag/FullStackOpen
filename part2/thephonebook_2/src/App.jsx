@@ -18,8 +18,8 @@ const App = () => {
   useEffect(() => {
     personService
       .getAll()
-      .then(res => {
-        setPersons(res.data);
+      .then(initialPersons => {
+        setPersons(initialPersons);
       });
   }, []);
 
@@ -40,8 +40,8 @@ const App = () => {
       };
       personService
         .create(personObj)
-        .then(res => {
-          setPersons(persons.concat(res.data));
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson));
         });
     }
     setNewName("");
