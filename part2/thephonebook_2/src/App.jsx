@@ -18,8 +18,8 @@ const App = () => {
   useEffect(() => {
     axios
       .get("http://localhost:3001/persons")
-      .then(response => {
-        setPersons(response.data)
+      .then(res => {
+        setPersons(res.data)
       });
   }, []);
 
@@ -38,7 +38,11 @@ const App = () => {
         name: newName,
         number: newNumber
       };
-      setPersons(persons.concat(personObj));
+      axios
+        .post("http://localhost:3001/persons", personObj)
+        .then(res => {
+          setPersons(persons.concat(res.data));
+        });
     }
     setNewName("");
     setNewNumber("");
