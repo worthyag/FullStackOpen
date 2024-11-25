@@ -10,24 +10,17 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    let name = "";
 
-    persons.forEach(person => {
-      if (person.name === newName) {
-        name = newName;
-        setNewName("");
-        return existingPerson(newName);
-      }
-    });
-
-    if (newName !== "" && newName !== name) {
+    if (persons.some(person => person.name === newName))
+      existingPerson(newName);
+    else {
       const personObj = {
         name: newName
       };
       setPersons(persons.concat(personObj));
-      setNewName("");
     }
-  };
+    setNewName("");
+  }
 
   const handleNewName = (event) => {
     setNewName(event.target.value);
