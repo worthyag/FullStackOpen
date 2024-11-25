@@ -49,6 +49,9 @@ const App = () => {
           })
           .catch(error => {
             console.log(error);
+            showNotification(`${toUpdate.name} doesn't exist or already deleted from server.`, 
+              3000,
+            false);
             setPersons(persons.filter(p => newName !== p.name));
           });
       } else
