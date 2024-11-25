@@ -15,6 +15,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
+  const [displayMessage, setDisplayMessage] = useState(null);
 
   useEffect(() => {
     personService
@@ -29,6 +30,11 @@ const App = () => {
     window.alert(`${name} is already added to phonebook`);
   };
 
+  const showNotification = (msg, duration) => {
+    setDisplayMessage(msg);
+    setTimeout(() => setDisplayMessage(null), duration);
+  };
+
   const addPerson = (event) => {
     event.preventDefault();
 
@@ -39,6 +45,7 @@ const App = () => {
           .update(toUpdate.id, {...toUpdate, number: newNumber})
           .then(updatedPerson => {
             setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson));
+            showNotification(`Updated ${updatedPerson.name}`, 3000);
           })
           .catch(error => {
             console.log(error);
@@ -56,6 +63,7 @@ const App = () => {
         .create(personObj)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson));
+          showNotification(`Added ${returnedPerson.name}`, 3000);
         });
     }
     setNewName("");
@@ -74,6 +82,7 @@ const App = () => {
         .deletePerson(id)
         .then(deletedPerson => {
           setPersons(persons.filter(p => p.id !== deletedPerson.id));
+          showNotification(`Deleted ${deletedPerson.name}`, 3000);
         }).catch(error => {
           alert("Person doesn't exist or already deleted from server.");
           console.log(error);
@@ -113,7 +122,7 @@ const App = () => {
   return (
     <div>
       <Header title="Phonebook" />
-      <Notification />
+      <Notification message={displayMessage} />
       <Filter filterContacts={filterContacts} />
       <AddContacts
         addPerson={addPerson}

@@ -1,4 +1,4 @@
-const Notification = () => {
+const Notification = ({ message }) => {
   const notificationStyle = {
     color: "green",
     fontSize: 18,
@@ -8,9 +8,12 @@ const Notification = () => {
     borderRadius: 8
   };
 
+  if (message === null)
+    return null;
+
   return (
     <div className="notification" style={notificationStyle}>
-      Operation Successful.
+      {message}
     </div>
   );
 };
