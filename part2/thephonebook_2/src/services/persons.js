@@ -3,7 +3,12 @@ import axios from "axios";
 const baseUrl = "http://localhost:3001/persons";
 
 const getAll = () => {
-  return axios.get(baseUrl).then(res => res.data);
+  const p = {
+    name: "uknown",
+    number: "839",
+    id: "3993"
+  }
+  return axios.get(baseUrl).then(res => res.data.concat(p));
 };
 
 const create = (personObj) => {

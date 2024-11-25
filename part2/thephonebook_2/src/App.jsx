@@ -15,7 +15,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [filter, setFilter] = useState("");
-  const [displayMessage, setDisplayMessage] = useState(null);
+  const [displayMessage, setDisplayMessage] = useState([null, null]);
 
   useEffect(() => {
     personService
@@ -30,9 +30,9 @@ const App = () => {
     window.alert(`${name} is already added to phonebook`);
   };
 
-  const showNotification = (msg, duration) => {
-    setDisplayMessage(msg);
-    setTimeout(() => setDisplayMessage(null), duration);
+  const showNotification = (msg, duration, isSuccess) => {
+    setDisplayMessage([msg, isSuccess]);
+    setTimeout(() => setDisplayMessage([null, null]), duration);
   };
 
   const addPerson = (event) => {
@@ -45,7 +45,7 @@ const App = () => {
           .update(toUpdate.id, {...toUpdate, number: newNumber})
           .then(updatedPerson => {
             setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson));
-            showNotification(`Updated ${updatedPerson.name}`, 3000);
+            showNotification(`Updated ${updatedPerson.name}`, 3000, true);
           })
           .catch(error => {
             console.log(error);
@@ -63,7 +63,7 @@ const App = () => {
         .create(personObj)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson));
-          showNotification(`Added ${returnedPerson.name}`, 3000);
+          showNotification(`Added ${returnedPerson.name}`, 3000, true);
         });
     }
     setNewName("");
@@ -82,10 +82,13 @@ const App = () => {
         .deletePerson(id)
         .then(deletedPerson => {
           setPersons(persons.filter(p => p.id !== deletedPerson.id));
-          showNotification(`Deleted ${deletedPerson.name}`, 3000);
+          showNotification(`Deleted ${deletedPerson.name}`, 3000, true);
         }).catch(error => {
-          alert("Person doesn't exist or already deleted from server.");
+          showNotification(`${selectedPerson.name} doesn't exist or already deleted from server.`, 
+                            3000,
+                          false);
           console.log(error);
+          setPersons(persons.filter(p => p.name !== selectedPerson.name));
         })
     } else {
       console.log("Operation cancelled!");
