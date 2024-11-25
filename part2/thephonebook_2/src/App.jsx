@@ -20,7 +20,7 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
-    if (persons.some(person => person.name === newName))
+    if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase()))
       existingPerson(newName);
     else {
       const personObj = {
