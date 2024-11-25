@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+import Header from "./components/Header";
+import Filter from "./components/Filter";
+import AddContacts from "./components/AddContacts";
+import Numbers from "./components/Numbers";
+
+
 const App = () => {
   const [persons, setPersons] = useState([{ name: "Arto Hellas", number: "07945283882" }]);
   const [newName, setNewName] = useState("");
@@ -51,22 +57,16 @@ const App = () => {
 
   return (
     <div>
-      <h1>Phonebook</h1>
-      <p>Filter shown with <input onChange={filterContacts} /></p>
-      <h2>Add New Contact</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input onChange={handleNewName} value={newName} />
-        </div>
-        <div>
-          number: <input onChange={handleNewNumber} value={newNumber} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Contacts</h2>
-      {contactsToShow.map(person => <p key={person.name}>{person.name} {person.number}</p>)}
+      <Header title="Phonebook" />
+      <Filter filterContacts={filterContacts} />
+      <AddContacts
+        addPerson={addPerson}
+        handleNewName={handleNewName}
+        newName={newName}
+        handleNewNumber={handleNewNumber}
+        newNumber={newNumber}
+      />
+      <Numbers contacts={contactsToShow} />
     </div>
   );
 };
