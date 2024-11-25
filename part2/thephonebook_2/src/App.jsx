@@ -31,8 +31,21 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
-    if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase()))
-      existingPerson(newName);
+    if (persons.some(person => person.name.toLowerCase() === newName.toLowerCase())) {
+      if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
+        const toUpdate = persons.find(p => p.name.toLowerCase() === newName.toLowerCase());
+        personService
+          .update(toUpdate.id, {...toUpdate, number: newNumber})
+          .then(updatedPerson => {
+            setPersons(persons.map(p => p.id !== updatedPerson.id ? p : updatedPerson));
+          })
+          .catch(error => {
+            console.log(error);
+            setPersons(persons.filter(p => newName !== p.name));
+          });
+      } else
+          existingPerson(newName);
+    }
     else {
       const personObj = {
         name: newName,
