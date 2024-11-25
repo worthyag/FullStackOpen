@@ -14,4 +14,10 @@ const update = (id, personObj) => {
   return axios.put(`${baseUrl}/${id}`, personObj).then(res => res.data);
 }
 
-export default { getAll, create, update };
+const deletePerson = (id) => {
+  return axios.delete(`${baseUrl}/${id}`)
+              .then(res => res.data)
+              .catch(error => console.log(error));
+}
+
+export default { getAll, create, update, deletePerson };

@@ -52,6 +52,24 @@ const App = () => {
     console.log("Will delete soon!");
     console.log(event.target.id);
     
+    const id = event.target.id;
+    const selectedPerson = persons.find(p => p.id === id) || { name: "unknown"};
+
+    if (window.confirm(`Delete ${selectedPerson.name}?`)) {
+      personService
+        .deletePerson(id)
+        .then(deletedPerson => {
+          setPersons(persons.filter(p => p.id !== deletedPerson.id));
+        }).catch(error => {
+          alert("Person doesn't exist or already deleted from server.");
+          console.log(error);
+        })
+    } else {
+      console.log("Operation cancelled!");
+    }
+
+
+    
     
   };
 
