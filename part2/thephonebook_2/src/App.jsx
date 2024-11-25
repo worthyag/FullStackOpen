@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Filter from "./components/Filter";
 import AddContacts from "./components/AddContacts";
 import Numbers from "./components/Numbers";
+import Notification from "./components/Notification";
 
 
 const App = () => {
@@ -112,6 +113,7 @@ const App = () => {
   return (
     <div>
       <Header title="Phonebook" />
+      <Notification />
       <Filter filterContacts={filterContacts} />
       <AddContacts
         addPerson={addPerson}
