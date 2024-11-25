@@ -48,6 +48,13 @@ const App = () => {
     setNewNumber("");
   }
 
+  const deletePerson = (event) => {
+    console.log("Will delete soon!");
+    console.log(event.target.id);
+    
+    
+  };
+
   const handleNewName = (event) => {
     setNewName(event.target.value);
   };
@@ -70,6 +77,7 @@ const App = () => {
     return lowerCased.includes(filter.toLowerCase());
   });
 
+
   return (
     <div>
       <Header title="Phonebook" />
@@ -81,7 +89,10 @@ const App = () => {
         handleNewNumber={handleNewNumber}
         newNumber={newNumber}
       />
-      <Numbers contacts={contactsToShow} />
+      <Numbers 
+        contacts={contactsToShow}
+        deletePerson={deletePerson} 
+      />
     </div>
   );
 };
