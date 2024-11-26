@@ -4,6 +4,7 @@ import axios from "axios";
 
 import SearchBar from "./components/SearchBar";
 import CountriesList from "./components/CountriesList";
+import CountryInfo from "./components/CountryInfo";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -69,6 +70,17 @@ const App = () => {
     <div>
       <SearchBar updateSearch={updateSearch} search={search} />
       <CountriesList toDisplay={toDisplay} selectedCountries={selectedCountries} />
+      {(displayCountry) ? 
+        <CountryInfo 
+          name={countryInfo.name}
+          capital={countryInfo.capital}
+          area={countryInfo.area}
+          languages={countryInfo.languages}
+          imgUrl={countryInfo.imgUrl}
+          alt={countryInfo.alt}
+        /> 
+        : ""
+      }
     </div>
   );
 };
