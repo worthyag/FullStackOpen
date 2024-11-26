@@ -66,9 +66,18 @@ const App = () => {
     displayCountries();
   };
 
+  const refresh = () => {
+    setSearch("");
+    setToDisplay(null);
+    setSelectedCountries([]);
+    setDisplayCountry(false);
+    setCountryInfo({});
+  };
+
   return (
     <div>
-      <SearchBar updateSearch={updateSearch} search={search} />
+      <SearchBar updateSearch={updateSearch} search={search} /> 
+      <button onClick={refresh()}>refresh</button>
       <CountriesList toDisplay={toDisplay} selectedCountries={selectedCountries} />
       {(displayCountry) ? 
         <CountryInfo 
