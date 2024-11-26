@@ -10,13 +10,34 @@ const App = () => {
   const [search, setSearch] = useState("");
   const [toDisplay, setToDisplay] = useState(null);
   const [selectedCountries, setSelectedCountries] = useState([]);
+  const [displayCountry, setDisplayCountry] = useState(false);
+  const [countryInfo, setCountryInfo] = useState({});
 
   useEffect(() => {
-    axios.get("https://studies.cs.helsinki.fi/restcountries/api/all")
-         .then(res => {
-            setCountries(res.data.map(c => [c.name.common, c.name.official]));
-         });
-  }, []);
+    axios
+      .get("https://studies.cs.helsinki.fi/restcountries/api/all")
+      .then(res => {
+        setCountries(res.data.map(c => [c.name.common, c.name.official]));
+      });
+
+    if (displayCountry) {
+      axios
+        .get(`https://studies.cs.helsinki.fi/restcountries/api/name/${displayCountry}`)
+        .then(res => {
+          const countryObj = {
+            name: res.data.name.common,
+            capital: res.data.capital,
+            area: res.data.area,
+            languages: Object.values(res.data.languages),
+            imgUrl: res.data.flags.png,
+            alt: res.data.flags.alt,
+          };
+
+          setCountryInfo(countryObj);
+        })
+
+    }
+  }, [displayCountry]);
 
   const displayCountries = () => {
     const filteredCountries = countries.filter(([common, official]) => {
@@ -31,8 +52,10 @@ const App = () => {
       setToDisplay("many");
     else if (filteredCountries.length > 1)
       setToDisplay("all");
-    else if (filteredCountries.length === 1)
+    else if (filteredCountries.length === 1) {
       setToDisplay("display");
+      setDisplayCountry(true);
+    }
     else
       setToDisplay(null);
   };
