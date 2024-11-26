@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import SearchBar from "./components/SearchBar";
+import CountriesList from "./components/CountriesList";
 
 const App = () => {
   const [countries, setCountries] = useState([]);
