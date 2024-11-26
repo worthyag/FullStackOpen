@@ -29,6 +29,7 @@ const App = () => {
             name: res.data.name.common,
             capital: res.data.capital,
             area: res.data.area,
+            population: res.data.population,
             languages: Object.values(res.data.languages),
             imgUrl: res.data.flags.png,
             alt: res.data.flags.alt,
@@ -84,6 +85,7 @@ const App = () => {
           name={countryInfo.name}
           capital={countryInfo.capital}
           area={countryInfo.area}
+          population={countryInfo.population}
           languages={countryInfo.languages}
           imgUrl={countryInfo.imgUrl}
           alt={countryInfo.alt}
