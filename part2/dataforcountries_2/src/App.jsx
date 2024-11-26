@@ -24,6 +24,8 @@ const App = () => {
     }).map(name => name.join(" / "));
     console.log(filteredCountries);
 
+    setSelectedCountries(filteredCountries);
+
     if (filteredCountries.length > 10)
       setToDisplay("many");
     else if (filteredCountries.length > 1)
@@ -43,8 +45,8 @@ const App = () => {
     <div>
       <SearchBar updateSearch={updateSearch} search={search} />
       {toDisplay && toDisplay === "many" ? (<p>Too many matches, specify another filter</p>) :
-      toDisplay === "all" ? (<p>Filtered</p>) :
-      toDisplay === "display" ? (<p>Selected</p>) : ""}
+      toDisplay === "all" ? (selectedCountries.map(c => <p key={c}>{c}</p>)) :
+      toDisplay === "display" ? (selectedCountries.map(c => <p key={c}>{c}</p>)) : ""}
     </div>
   );
 };
