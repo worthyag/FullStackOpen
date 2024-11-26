@@ -46,7 +46,7 @@ const App = () => {
       return common.toLowerCase().includes(search.toLowerCase()) 
           || official.toLowerCase().includes(search.toLowerCase());
     }).map(name => name.join(" / "));
-    console.log(filteredCountries);
+    // console.log(filteredCountries);
 
     setSelectedCountries(filteredCountries);
 
@@ -75,11 +75,23 @@ const App = () => {
     setCountryInfo({});
   };
 
+  const chooseCountry = (event) => {
+    console.log("You clicked me!");
+    console.log(event.target.id);
+    
+    
+    setDisplayCountry(event.target.id);
+  };
+
   return (
     <div>
       <SearchBar updateSearch={updateSearch} search={search} /> 
       <button onClick={refresh}>refresh</button>
-      <CountriesList toDisplay={toDisplay} selectedCountries={selectedCountries} />
+      <CountriesList 
+        toDisplay={toDisplay} 
+        selectedCountries={selectedCountries}
+        chooseCountry={chooseCountry}
+      />
       {(displayCountry) ? 
         <CountryInfo 
           name={countryInfo.name}

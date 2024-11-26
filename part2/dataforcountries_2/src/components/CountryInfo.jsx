@@ -8,17 +8,7 @@ const CountryInfo = (props) => {
   return (
     <div>
       <h1>{name}</h1>
-      <p>
-        capital: {capitals.length > 0 ? (
-          capitals.map(capital => (
-            <span key={capital}>{capital}</span>
-          ))
-        ) : (
-          <span>No capital available</span>
-        )}
-      </p>
-      <p>population: {population}</p>
-      <p>area: {area}</p>
+      <img src={imgUrl} alt={alt} />
       <h4>Languages</h4>
       <ul>
         {languages.length > 0 ? (
@@ -29,7 +19,17 @@ const CountryInfo = (props) => {
           <li>No languages available</li>
         )}
       </ul>
-      <img src={imgUrl} alt={alt} />
+      <p>population: {population}</p>
+      <p>area: {area}</p>
+      <p>
+        capital: {capitals.length > 0 ? (
+          capitals.map(capital => (
+            <span key={capital}>{capital}</span>
+          ))
+        ) : (
+          <span>No capital available</span>
+        )}
+      </p>
     </div>
   );
 };
