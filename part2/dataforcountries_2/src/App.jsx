@@ -34,7 +34,7 @@ const App = () => {
     else if (filteredCountries.length === 1)
       setToDisplay("display");
     else
-    setToDisplay(null);
+      setToDisplay(null);
   };
 
   const updateSearch = (event) => {
@@ -45,9 +45,7 @@ const App = () => {
   return (
     <div>
       <SearchBar updateSearch={updateSearch} search={search} />
-      {toDisplay && toDisplay === "many" ? (<p>Too many matches, specify another filter</p>) :
-      toDisplay === "all" ? (selectedCountries.map(c => <p key={c}>{c}</p>)) :
-      toDisplay === "display" ? (selectedCountries.map(c => <p key={c}>{c}</p>)) : ""}
+      <CountriesList toDisplay={toDisplay} selectedCountries={selectedCountries} />
     </div>
   );
 };
