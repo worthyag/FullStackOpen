@@ -11,7 +11,7 @@ const App = () => {
   const [search, setSearch] = useState("");
   const [toDisplay, setToDisplay] = useState(null);
   const [selectedCountries, setSelectedCountries] = useState([]);
-  const [displayCountry, setDisplayCountry] = useState(false);
+  const [displayCountry, setDisplayCountry] = useState(null);
   const [countryInfo, setCountryInfo] = useState({});
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const App = () => {
       setToDisplay("all");
     else if (filteredCountries.length === 1) {
       setToDisplay("display");
-      setDisplayCountry(true);
+      setDisplayCountry((filteredCountries[0].split(" / "))[0]);
     }
     else
       setToDisplay(null);
@@ -70,14 +70,14 @@ const App = () => {
     setSearch("");
     setToDisplay(null);
     setSelectedCountries([]);
-    setDisplayCountry(false);
+    setDisplayCountry(null);
     setCountryInfo({});
   };
 
   return (
     <div>
       <SearchBar updateSearch={updateSearch} search={search} /> 
-      <button onClick={refresh()}>refresh</button>
+      <button onClick={refresh}>refresh</button>
       <CountriesList toDisplay={toDisplay} selectedCountries={selectedCountries} />
       {(displayCountry) ? 
         <CountryInfo 

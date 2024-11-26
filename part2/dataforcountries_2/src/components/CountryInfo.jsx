@@ -1,9 +1,14 @@
 const CountryInfo = (props) => {
-  const { name, capitals = [], area, languages = [], imgUrl, alt } = props;
+  // const { name, capitals = [], area, languages = [], imgUrl, alt } = props;
+  const { name, capitals, area, languages, imgUrl, alt } = props;
+
+  console.log(props);
+  
+
   return (
     <div>
       <h1>{name}</h1>
-      <p>
+      {/* <p>
         capital: {capitals.length > 0 ? (
           capitals.map(capital => (
             <span key={capital}>{capital}</span>
@@ -23,7 +28,7 @@ const CountryInfo = (props) => {
           <li>No languages available</li>
         )}
       </ul>
-      <img src={imgUrl} alt={alt} />
+      <img src={imgUrl} alt={alt} /> */}
     </div>
   );
 };
