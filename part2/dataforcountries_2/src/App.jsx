@@ -15,12 +15,23 @@ const App = () => {
          });
   }, []);
 
+  const displayCountries = () => {
+    const filteredCountries = countries.filter(([common, official]) => {
+      return common.toLowerCase().includes(search.toLowerCase()) 
+          || official.toLowerCase().includes(search.toLowerCase());
+    }).map(name => name.join(" / "));
+    console.log(filteredCountries);
+  };
+
   const updateSearch = (event) => {
     setSearch(event.target.value);
+    displayCountries();
   };
 
   return (
-    <SearchBar updateSearch={updateSearch} search={search} />
+    <div>
+      <SearchBar updateSearch={updateSearch} search={search} />
+    </div>
   );
 };
 
